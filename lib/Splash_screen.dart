@@ -1,7 +1,5 @@
 
-import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,7 +18,7 @@ class _splashScreenState extends State<splashScreen> {
    //چندثانیه صبر کن و بعد یک کاری انجام بده
    Future.delayed(Duration(seconds: 3 )).then((value) =>{
      
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) =>MainScreen()
           )),
    } );
