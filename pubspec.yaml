@@ -63,6 +63,16 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/programming.png
+    - assets/icons/hashtag.png
+    - assets/icons/blue_pen.png
+    - assets/icons/microphone.png 
+    - assets/images/img1.png 
+    - assets/icons/home.png
+    - assets/icons/user.png
+    - assets/icons/writer.png
+
+
+
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

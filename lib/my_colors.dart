@@ -18,17 +18,22 @@ class solidColors {
     static const Color submitArticle =  Color.fromARGB(255, 209, 209, 209);
     static const Color submitPodCast =  Color.fromARGB(255, 246, 246, 246);
     static const Color subText =  Color.fromARGB(255, 197, 197, 197);
+     static const Color seeMore =  Color.fromARGB(255, 40, 107, 184);
 
 }
 
 class gradientColors {
 
   static const List<Color> bottomNave = [const Color.fromARGB(255, 25, 0, 94),const Color.fromARGB(255, 68, 4, 78)];
+   static const List<Color> bottomNavBackground = [const Color.fromARGB(0, 255, 255, 255),const Color.fromARGB(255, 255, 255, 255)];
   static const List<Color> tags = [const Color.fromARGB(255, 0, 0, 0),const Color.fromARGB(255, 63, 63, 63)];
+
+  static const List<Color> blogPost = [const Color.fromARGB(255, 0, 0, 0),const Color.fromARGB(0, 0, 0, 0)];
   static const List<Color> homePosterCoverGradiant = [
     const Color.fromARGB(0, 0, 0, 0),
     const Color.fromARGB(195, 72, 20, 88),
 
   const Color.fromARGB(255, 280, 20, 81)];
+
   
 }
