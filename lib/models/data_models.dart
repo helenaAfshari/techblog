@@ -31,11 +31,11 @@ class BlogModel{
 });
    
 }
-class podcastModel{
+class PodcastModel{
   int id;
   String imageUrl;
   String title;
-  podcastModel({
+  PodcastModel({
     required this.id,
     required this.imageUrl,
     required this.title,

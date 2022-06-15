@@ -279,10 +279,10 @@ List<BlogModel> blogList = [
 
 
 //hotPodcastList<podcastModel>model=[
-List<podcastModel>podcast =[
-    podcastModel(id:1, imageUrl: "https://s6.uupload.ir/files/3ecbaa26b35d48dab0dd29c9807b67ef_zx3c.png", title: "رمزون"),
-    podcastModel(id: 2, imageUrl: "https://s6.uupload.ir/files/group_13_nk4f.png", title: "رادیو کدیاد"),
-    podcastModel(id: 3, imageUrl: "https://s6.uupload.ir/files/mapping-metaverse02_s6uc.png", title: "تکنو کست"),
+List<PodcastModel>podcast =[
+    PodcastModel(id:1, imageUrl: "https://s6.uupload.ir/files/3ecbaa26b35d48dab0dd29c9807b67ef_zx3c.png", title: "رمزون"),
+    PodcastModel(id: 2, imageUrl: "https://s6.uupload.ir/files/group_13_nk4f.png", title: "رادیو کدیاد"),
+    PodcastModel(id: 3, imageUrl: "https://s6.uupload.ir/files/mapping-metaverse02_s6uc.png", title: "تکنو کست"),
 
 
 
