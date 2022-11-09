@@ -28,7 +28,34 @@ class SingleManageArticle extends StatelessWidget {
       FilePickerController filePickerController = Get.put(FilePickerController());
 
   SingleManageArticle({Key? key}) : super(key: key);
+    
 
+    getTitle(){
+
+      Get.defaultDialog(
+       title: "عنوان مقاله",
+       titleStyle:TextStyle(
+        color: SolidColors.scafoldBg) ,
+       
+       content:  TextField(
+        controller: manageArticleController.titleTextEditingController,
+        keyboardType: TextInputType.text,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 248, 249, 250),
+        ),
+        decoration: InputDecoration(
+          hintText: 'اینجا بنویس',
+
+        ),
+       )
+       , backgroundColor: SolidColors.prymaryColor,
+       radius: 8,
+       confirm: ElevatedButton(onPressed: () {
+        manageArticleController.updateTitle();
+         Get.back();
+       }, child:Text("ثبت") )
+      );
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +70,6 @@ class SingleManageArticle extends StatelessWidget {
                   Stack(
                     children: [
                           filePickerController.file.value.name=='nothing'?
-
     
                       CachedNetworkImage(
                         imageUrl: manageArticleController
@@ -125,9 +151,17 @@ class SingleManageArticle extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24,),
+                      
+                  GestureDetector(
+                    onTap: (() {
+                      //get Title
+                      getTitle();
+                    }),
+                    child: SeeMoreBlog(
+                   bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: ' ویرایش عنوان مقاله',),
+                  ),
 
-                  SeeMoreBlog(
-               bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: ' ویرایش عنوان مقاله',),
+
                   Padding(
                     padding:  EdgeInsets.all(Dimens.halfbodyMargin),
                     
