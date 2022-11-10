@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tecblog/binding.dart';
 import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/view/Splash_screen.dart';
-import 'package:tecblog/view/articles/html_content_editor.dart';
 import 'package:tecblog/view/articles/manage_article.dart';
 import 'package:tecblog/view/articles/single_manage_article.dart';
 
@@ -60,7 +59,7 @@ class MyApp extends StatelessWidget {
              page: (() => SingleManageArticle()),
              binding: ArticleManagerBinding()),
       ],
-        home:  HtmlEditorExample(title: 'content',),
+        home:  SplashScreen(),
         );
   }
 

@@ -15,6 +15,7 @@ import 'package:tecblog/controller/article/manage_article.dart';
 import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/controller/file_controller.dart';
 import 'package:tecblog/gen/assets.gen.dart';
+import 'package:tecblog/view/articles/article_content_editor.dart';
 import 'package:tecblog/view/articles/article_list_screen.dart';
 
 
@@ -172,8 +173,13 @@ class SingleManageArticle extends StatelessWidget {
                     ),
                   ),
                
-                    SeeMoreBlog(
-               bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: ' ویرایش متن اصلی مقاله',),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(()=>ArticleContentEditor());
+                      },
+                      child: SeeMoreBlog(
+                    bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: ' ویرایش متن اصلی مقاله',),
+                    ),
                  
                   Padding(
                     padding: const EdgeInsets.all(8.0),
