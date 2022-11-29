@@ -52,4 +52,9 @@ class ManageArticleController extends GetxController{
   });
 
   }
+  storeArticle(){
+      
+  }
+
+  
 }

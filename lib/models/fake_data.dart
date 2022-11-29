@@ -19,7 +19,6 @@ Map homePagePosterMap ={
 
 //blog fake data
 List<HashTagModel>tagList = [
-
   
 HashTagModel(title: "جاوا",),
 HashTagModel(title: "کاتلین",),

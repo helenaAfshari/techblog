@@ -11,12 +11,15 @@ import 'package:tecblog/component/dimense.dart';
 import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/component/mycomponent.dart';
 import 'package:tecblog/controller/article/list_article_controller.dart';
-import 'package:tecblog/controller/article/manage_article.dart';
+
 import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/controller/file_controller.dart';
+import 'package:tecblog/controller/home_screen_controller.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:tecblog/view/articles/article_content_editor.dart';
 import 'package:tecblog/view/articles/article_list_screen.dart';
+
+import '../../controller/article/manage_article_controller.dart';
 
 
 
@@ -35,7 +38,7 @@ class SingleManageArticle extends StatelessWidget {
 
       Get.defaultDialog(
        title: "عنوان مقاله",
-       titleStyle:TextStyle(
+       titleStyle:const TextStyle(
         color: SolidColors.scafoldBg) ,
        
        content:  TextField(
@@ -184,8 +187,9 @@ class SingleManageArticle extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: HtmlWidget(
+                      
                       manageArticleController.articleInfoModel.value.content!,
-                      textStyle: textheme.headline5,
+                      textStyle: textheme.headline6,
                       enableCaching: true,
                       onLoadingBuilder: ((context, element, loadingProgress) =>
                           const loading()),
@@ -194,11 +198,27 @@ class SingleManageArticle extends StatelessWidget {
                   const SizedBox(
                     height: 25,
                   ),
-                  SeeMoreBlog(
-               bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: 'انتخاب دسته بندی',),
-                  tags(textheme),
+                  GestureDetector(
+                    onTap: () {
+                      chooseCatsBottomSheet(textheme);
+                    },
+                    child: SeeMoreBlog(
+                 bodyMargin: Dimens.bodyMargin, 
+                 textTheme: textheme, 
+                 title: 'انتخاب دسته بندی',),
+                  ),
+                  Padding(padding: EdgeInsets.all(Dimens.halfbodyMargin),
+                  child: Text(
+                  manageArticleController.articleInfoModel.value.catName==null?"هیچ دسته بندی انتخاب نشده":
+                  manageArticleController.articleInfoModel.value.catName!,
+                  maxLines: 2,
+                  style: textheme.titleLarge,
+                  ),
+                  ),
                   
-                 
+                 ElevatedButton(
+                  onPressed: () =>manageArticleController.storeArticle() , 
+                  child: Text("ارسال مطلب"))
                   ]
                   ),
                 ),
@@ -207,24 +227,23 @@ class SingleManageArticle extends StatelessWidget {
     );
   }
 
-  Widget tags(textheme) {
+  Widget cats(textheme) {
+    
+    var homeScreenController = Get.find<HomeScreenController>();
     return SizedBox(
-      height: 35,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: manageArticleController.tagList.length,
+      height: Get.height/1.7,
+      child: GridView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: homeScreenController.tagsList.length,
           itemBuilder: ((context, index) {
             return GestureDetector(
               onTap: () async {
-                var tagId = manageArticleController.tagList[index].id!;
-
-                await Get.find<ListArticleController>()
-                    .getArticleListWithTagsId(tagId);
-
-                String tagName = manageArticleController.tagList[index].title!;
-                Get.to(ArticleListScreen(
-                  title: tagName,
-                ));
+                manageArticleController.articleInfoModel.update((val) {
+                  val?.catName=homeScreenController.tagsList[index].title!;
+                  val?.catId=homeScreenController.tagsList[index].id!;
+                });
+                Get.back();
+                
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
@@ -232,18 +251,50 @@ class SingleManageArticle extends StatelessWidget {
                   height: 30,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(24)),
-                      color: Colors.grey),
+                      color: SolidColors.prymaryColor),
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child: Text(
-                        manageArticleController.tagList[index].title!,
-                        style: textheme.headline2,
+                      child: Center(
+                        child: Text(
+                          homeScreenController.tagsList[index].title!,
+                          style: textheme.headline2,
+                        ),
                       )),
                 ),
               ),
             );
-          })),
+          }), gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            ),),
     );
   }
 
+chooseCatsBottomSheet(TextTheme textTheme){
+Get.bottomSheet(
+  Container(
+     height: Get.height/1.5,
+     decoration: const BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      )
+     ),
+     child: Padding(
+       padding:  EdgeInsets.all(8.0),
+       child: Column(
+        children:  [
+         const Text("انتخاب دسته بندی"),
+         const SizedBox(height: 8),
+         cats(textTheme),
+        ],
+       ),
+     ),
+  ),
+  isScrollControlled: true,
+  persistent: true,
+);
+}
 }

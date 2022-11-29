@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:tecblog/component/mycomponent.dart';
-import 'package:tecblog/controller/article/manage_article.dart';
+
+import '../../controller/article/manage_article_controller.dart';
 
 class ArticleContentEditor extends StatelessWidget{
 
@@ -31,7 +32,9 @@ class ArticleContentEditor extends StatelessWidget{
                   ),
                   callbacks: Callbacks(
                     onChangeContent: (p0) {
-                      manageArticleController.articleInfoModel.value.content=p0;
+                      manageArticleController.articleInfoModel.update((val) {
+                        val?.content=p0;
+                      });
                       log(manageArticleController.articleInfoModel.value.content.toString());
                     },
                   ),

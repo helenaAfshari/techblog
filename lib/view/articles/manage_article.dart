@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tecblog/constant/my_strings.dart';
 import 'package:tecblog/component/mycomponent.dart';
-import 'package:tecblog/controller/article/manage_article.dart';
 
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:tecblog/main.dart';
+
+import '../../controller/article/manage_article_controller.dart';
 
 
 
