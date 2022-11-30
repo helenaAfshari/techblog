@@ -217,8 +217,11 @@ class SingleManageArticle extends StatelessWidget {
                   ),
                   
                  ElevatedButton(
-                  onPressed: () =>manageArticleController.storeArticle() , 
-                  child: Text("ارسال مطلب"))
+                  onPressed: () async =>await manageArticleController.storeArticle() , 
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("ارسال مطلب"),
+                  )),
                   ]
                   ),
                 ),
