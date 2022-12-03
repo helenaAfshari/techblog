@@ -10,7 +10,6 @@ import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/view/Splash_screen.dart';
 import 'package:tecblog/view/articles/manage_article.dart';
 import 'package:tecblog/view/articles/single_manage_article.dart';
-
 import 'package:tecblog/view/main_screen/main_screen.dart';
 import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';

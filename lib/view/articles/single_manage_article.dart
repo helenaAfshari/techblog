@@ -164,8 +164,6 @@ class SingleManageArticle extends StatelessWidget {
                     child: SeeMoreBlog(
                    bodyMargin: Dimens.bodyMargin, textTheme: textheme, title: ' ویرایش عنوان مقاله',),
                   ),
-
-
                   Padding(
                     padding:  EdgeInsets.all(Dimens.halfbodyMargin),
                     
@@ -218,8 +216,8 @@ class SingleManageArticle extends StatelessWidget {
                   
                  ElevatedButton(
                   onPressed: () async =>await manageArticleController.storeArticle() , 
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text("ارسال مطلب"),
                   )),
                   ]
@@ -250,10 +248,10 @@ class SingleManageArticle extends StatelessWidget {
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
-                child: Container(
+                child: Container( 
                   height: 30,
                   decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                      borderRadius: BorderRadius.all(Radius.circular(24)), 
                       color: SolidColors.prymaryColor),
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
