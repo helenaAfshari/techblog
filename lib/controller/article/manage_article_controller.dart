@@ -48,6 +48,7 @@ class ManageArticleController extends GetxController{
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
       });
+      
         loading.value=false;
       
     }
@@ -71,10 +72,12 @@ class ManageArticleController extends GetxController{
          ApiArticleKeyConstant.userId : GetStorage().read(StorageKey.userId) ,
          ApiArticleKeyConstant.image : await dio.MultipartFile.fromFile(fileController.file.value.path!),
          ApiArticleKeyConstant.command : Commands.store,
-
+         ApiArticleKeyConstant.tagList:"[]",
+         
       };
       var response = await DioService().postMethod( map, ApiConstant.articlePost); 
       log(response.data.toString());
+      loading.value = false;
   }
 
   

@@ -25,5 +25,4 @@ class ApiArticleKeyConstant{
   static const command ="command";
 
 
-
 }
