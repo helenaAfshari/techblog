@@ -10,7 +10,8 @@ class ApiConstant{
   static const PublishedByMe = baseUrl + "article/get.php?command=published_by_me&user_id=1";
   static const postRegister = baseUrl + "register/action.php"; 
   static const articlePost = baseUrl + "article/post.php";
-  //article/post.php
+  static const podcastFile = baseUrl + "podcast/get.php?command=get_files&podcats_id=";
+  
 
 }
 

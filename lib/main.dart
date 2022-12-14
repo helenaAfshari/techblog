@@ -13,6 +13,7 @@ import 'package:tecblog/view/articles/single_manage_article.dart';
 import 'package:tecblog/view/main_screen/main_screen.dart';
 import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';
+import 'package:tecblog/view/podcast/single_podcast.dart';
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -54,9 +55,14 @@ class MyApp extends StatelessWidget {
               GetPage(
               name: NamedRoute.singleManageArticle,
              page: (() => SingleManageArticle()),
-             binding: ArticleManagerBinding()),
+             binding: ArticleManagerBinding()),  
+             GetPage(
+              name: NamedRoute.singleManageArticle,
+             page: (() => SingleManageArticle()),
+            ),
       ],
         home:  SplashScreen(),
+        // home: SinglePodcast(),
         );
   }
 

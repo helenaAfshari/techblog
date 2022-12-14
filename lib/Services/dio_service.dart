@@ -35,7 +35,7 @@ class DioService {
       dio.options.headers['authorization'] = '$token';
     }
 
-    return await dio
+  return await dio
         .post(url,
             data: dio_service.FormData.fromMap(map),
             options: Options(responseType: ResponseType.json, method: 'POST'))
@@ -45,7 +45,7 @@ class DioService {
       log(response.statusCode.toString());
       return response;
     }).catchError((err){
-          log(err.toString());
+      log(err.toString());
       if(err is DioError){
         return err.response!;
       }
