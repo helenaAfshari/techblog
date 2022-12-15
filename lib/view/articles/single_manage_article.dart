@@ -1,5 +1,4 @@
 
-
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -57,7 +56,7 @@ class SingleManageArticle extends StatelessWidget {
        confirm: ElevatedButton(onPressed: () {
         manageArticleController.updateTitle();
          Get.back();
-       }, child:Text("ثبت") )
+       }, child:Text("ثبت") ),
       );
     }
 
@@ -114,8 +113,6 @@ class SingleManageArticle extends StatelessWidget {
                                   ),
                                 ),
                                 const Expanded(child: SizedBox()),
-                               
-                               
                               ],
                             ),
                           ))
@@ -150,7 +147,7 @@ class SingleManageArticle extends StatelessWidget {
                             ),
                                                  ),
                           ),
-                        ))
+                        )),
 
                     ],
                   ),
@@ -215,10 +212,14 @@ class SingleManageArticle extends StatelessWidget {
                   ),
                   
                  ElevatedButton(
-                  onPressed: () async =>await manageArticleController.storeArticle() , 
-                  child: const Padding(
+                  onPressed:( () async =>await manageArticleController.storeArticle()), 
+                  child:  Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("ارسال مطلب"),
+                    child: Text(
+                      manageArticleController.loading.value? 
+                      "صبرکنید...":
+                      "ارسال مطلب"
+                      ),
                   )),
                   ]
                   ),

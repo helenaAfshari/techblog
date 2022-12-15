@@ -16,7 +16,7 @@ static const String logout = "خروج از حساب کاربری";
 static const String welcom = """ به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
-ثبت نام کنی 
+ثبت نام کنی         
 """;
 static const String articleEmpty = """  
 

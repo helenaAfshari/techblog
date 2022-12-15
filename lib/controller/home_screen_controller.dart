@@ -5,7 +5,7 @@ import 'package:tecblog/models/article_model.dart';
 
 import 'package:tecblog/models/poster_model.dart';
 import 'package:tecblog/models/tags_model.dart';
-import 'package:tecblog/models/top_podcast.dart';
+import 'package:tecblog/models/podcast_model.dart';
 
 class HomeScreenController extends GetxController {
 
@@ -13,7 +13,7 @@ class HomeScreenController extends GetxController {
 
      RxList<TagsModel> tagsList = RxList();
   RxList<ArticleModel> topVisitedList = RxList();
-    RxList<TopPodcastModel> topPodcast = RxList();
+    RxList<PodcastModel> topPodcast = RxList();
     RxBool loading = false.obs;
      
      @override
@@ -37,7 +37,7 @@ class HomeScreenController extends GetxController {
       });
         response.data['top_podcasts'].forEach((element) {
        
-        topPodcast.add(TopPodcastModel.fromJson(element));
+        topPodcast.add(PodcastModel.fromJson(element));
       });
 
       response.data['tags'].forEach((element){

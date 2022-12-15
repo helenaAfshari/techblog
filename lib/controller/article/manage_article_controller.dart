@@ -41,7 +41,7 @@ class ManageArticleController extends GetxController{
       loading.value = true;
     //TODO get userid from getStorage ApiConstant.getArticleList+userid
     // var response = await DioService().getMethod(ApiConstant.PublishedByMe+GetStorage().read(StorageKey.userId));
-        var response = await DioService().getMethod(ApiConstant.PublishedByMe+"1");
+        var response = await DioService().getMethod(ApiConstant.PublishedByMe + "1");
 
       
     if (response.statusCode == 200) {
@@ -57,7 +57,7 @@ class ManageArticleController extends GetxController{
   updateTitle(){
   articleInfoModel.update((val) {
     val!.title = titleTextEditingController.text;
-
+              
   });
 
   }
@@ -69,10 +69,11 @@ class ManageArticleController extends GetxController{
          ApiArticleKeyConstant.title : articleInfoModel.value.title,
          ApiArticleKeyConstant.content : articleInfoModel.value.content,
          ApiArticleKeyConstant.catId : articleInfoModel.value.catId,
+         ApiArticleKeyConstant.tagList:"[]",
          ApiArticleKeyConstant.userId : GetStorage().read(StorageKey.userId) ,
          ApiArticleKeyConstant.image : await dio.MultipartFile.fromFile(fileController.file.value.path!),
          ApiArticleKeyConstant.command : Commands.store,
-         ApiArticleKeyConstant.tagList:"[]",
+         
          
       };
       var response = await DioService().postMethod( map, ApiConstant.articlePost); 

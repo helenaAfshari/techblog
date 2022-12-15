@@ -3,7 +3,7 @@
 
 import 'package:tecblog/constant/api_constant.dart';
 
-class TopPodcastModel{
+class PodcastModel{
 
    String? id;
    String? title;
@@ -13,7 +13,7 @@ class TopPodcastModel{
    String?createdAt;
 
 
-   TopPodcastModel({
+   PodcastModel({
       
       required this.id,
       required this.title,
@@ -26,12 +26,12 @@ class TopPodcastModel{
    );
 
 
-   TopPodcastModel.fromJson(Map<String, dynamic> element){
+   PodcastModel.fromJson(Map<String, dynamic> element){
    
       id  = element["id"];
       title = element["title"];
       poster =ApiConstant.hostDlUrl + element["poster"];
-      publisher = element["publisher"];
+      publisher = element["author"];
       view = element["view"];
       createdAt = element["created_at"];
 

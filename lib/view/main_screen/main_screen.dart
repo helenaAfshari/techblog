@@ -177,7 +177,7 @@ class BottomNavigation extends StatelessWidget {
           padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
           child: Container(
             height: size.height / 8,
-            decoration:MyDecorations.mainGradient ,
+            decoration:MyDecorations.mainGradient,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -191,7 +191,7 @@ class BottomNavigation extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     //TODO check Login sTatus
-                     Get.find<RegisterController>().routTowriteBottomSheet();
+                     Get.find<RegisterController>().routTowriteBottomSheet();   
                      
                   },
                   icon: ImageIcon(

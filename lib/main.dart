@@ -15,6 +15,7 @@ import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 
+
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   //این قسمت برای این که رنگ نوبار و ایکون های گوشی مثل وای فای اینارو چگونه نشان بده خودمون دستی دادیم
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         getPages: [
            GetPage(name: NamedRoute.routeMainScreen, page: () => MainScreen(),binding: RegisterBinding()),
             GetPage(name: NamedRoute.routeSingleArticle, page: () => Single(),binding: ArticleBinding()),
-
+           
             GetPage(
               name: NamedRoute.routemanageArticle,
              page: (() => ManageArticleScreen()),
@@ -59,6 +60,10 @@ class MyApp extends StatelessWidget {
              GetPage(
               name: NamedRoute.singleManageArticle,
              page: (() => SingleManageArticle()),
+            ),
+            GetPage(
+              name: NamedRoute.singlePodcast, 
+              page:( () => PodcastSingle()),
             ),
       ],
         home:  SplashScreen(),
@@ -135,9 +140,15 @@ class MyApp extends StatelessWidget {
 }
 
 class NamedRoute{
+ 
+ //اینجا به صورت staticکار میکند 
+ //اگر از این کانستراکتور استفاده کنیم
+ NamedRoute._();
+
 static String routeMainScreen = "/MainScreen";
 static String routeSingleArticle = "/SingleArticle";
 static String routemanageArticle = "/ManageArticle";
 static String singleManageArticle = "/SingleManageArticle";
+static String singlePodcast = "/singlePodcast";
 }
 

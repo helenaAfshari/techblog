@@ -6,15 +6,27 @@ import 'package:tecblog/component/decorations.dart';
 import 'package:tecblog/component/dimense.dart';
 import 'package:tecblog/component/mycomponent.dart';
 import 'package:tecblog/constant/my_colors.dart';
+import 'package:tecblog/controller/podcast/single_podcast_controller.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class SinglePodcast extends StatelessWidget {
-  const SinglePodcast
-  ({Key? key}) : super(key: key);
+import '../../models/podcast_model.dart';
+
+class PodcastSingle extends StatelessWidget {
+
+   late SinglePodcastController singlePodcastController;
+     late PodcastModel podcastModel;
+     
+
+    PodcastSingle(){
+      //این آرگومینت را به homeScreenدادیم
+      podcastModel = Get.arguments;
+         singlePodcastController = Get.put(SinglePodcastController(id: podcastModel.id));
+    }
 
   @override
   Widget build(BuildContext context) {
+    print(singlePodcastController.id);
        var textheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
@@ -30,14 +42,18 @@ class SinglePodcast extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            CachedNetworkImage(
-                              imageUrl: "https://s6.uupload.ir/files/wallpapergram.ir_1557321899_66413_0s86.jpg",
-                                  
-                              imageBuilder: ((context, imageProvider) =>
-                                  Image(image: imageProvider)),
-                              placeholder: ((context, url) => const loading()),
-                              errorWidget: ((context, url, error) =>
-                                  Image.asset(Assets.images.singlePlaceHolder.path)),
+                            SizedBox(
+                              height: Get.height/3,
+                              width: double.infinity,
+                              child: CachedNetworkImage(
+                                imageUrl: podcastModel.poster!,
+                                    
+                                imageBuilder: ((context, imageProvider) =>
+                                    Image(image: imageProvider,fit: BoxFit.fill,)),
+                                placeholder: ((context, url) => const loading()),
+                                errorWidget: ((context, url, error) =>
+                                    Image.asset(Assets.images.singlePlaceHolder.path)),
+                              ),
                             ),
                             Positioned(
                                 top: 0,
@@ -81,7 +97,7 @@ class SinglePodcast extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                ))
+                                )),
                           ],
                         ),
                         Padding(
@@ -89,7 +105,7 @@ class SinglePodcast extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              " عنوان پادکست",
+                              podcastModel.title!,
                               maxLines: 2,
                               style: textheme.titleLarge,
                             ),
@@ -107,43 +123,43 @@ class SinglePodcast extends StatelessWidget {
                                 width: 16,
                               ),
                               Text(
-                               "هانا",
+                               podcastModel.publisher!,
                                 style: textheme.headline4,
                               ),
                               const SizedBox(
                                 width: 16,
                               ),
-                            
                             ],
                           ),
-                        ),
+                        ),  
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                            
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                     Row(
-                                      children: [
-                                        ImageIcon(
-                                          Image.asset(Assets.icons.microphone.path).image,
-                                          color: SolidColors.seeMore,
-                                          ),
-                                          const SizedBox(width: 8,),
-                                          Text("بخش چهارم : فریلنسر دیوانه",style: textheme.headline4,),
-                                      ],
-                                     ),
-                                     const Text("22:00")
-                                ],
-                              ),
-                            );
-                          },),
+                          child:singlePodcastController.loading.value==false?  ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: singlePodcastController.podcastFileList.length,
+                              itemBuilder: (context, index) {           
+                              return Padding(
+                                padding:  const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                       Row(
+                                        children: [
+                                          ImageIcon(
+                                            Image.asset(Assets.icons.microphone.path).image,
+                                            color: SolidColors.seeMore,
+                                            ),
+                                             SizedBox(width:Get.width/19,),   
+                                            Text(singlePodcastController.podcastFileList[index].title!,
+                                            style: textheme.headline4,),  
+                                        ],
+                                       ),
+                                       Text(singlePodcastController.podcastFileList[index].length!+":00"),
+                                  ],
+                                ),
+                              );
+                            },):const loading(),
+                         
                         )
                         ],
                         ),

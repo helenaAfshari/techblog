@@ -16,7 +16,7 @@ class DioService {
         .get(url,
             options: Options(responseType: ResponseType.json, method: 'GET'))
         .then((response) {
-      log(response.toString());
+      log(response.toString()); 
       return response;
     }).catchError((err){
         if(err is DioError){
@@ -31,6 +31,7 @@ class DioService {
     dio.options.headers['content-Type'] = 'application/json';
     
     var token = GetStorage().read(StorageKey.token);
+    
     if(token!=null){
       dio.options.headers['authorization'] = '$token';
     }

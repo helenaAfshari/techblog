@@ -6,9 +6,11 @@ import 'package:tecblog/constant/my_strings.dart';
 import 'package:tecblog/component/mycomponent.dart';
 import 'package:tecblog/controller/home_screen_controller.dart';
 import 'package:tecblog/controller/article/single_article_controller.dart';
+import 'package:tecblog/main.dart';
 import 'package:tecblog/models/fake_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:tecblog/view/articles/article_list_screen.dart';
+import 'package:tecblog/view/podcast/single_podcast.dart';
 import '../../gen/assets.gen.dart';
 
 // ignore: must_be_immutable
@@ -180,43 +182,51 @@ class HomeScreen extends StatelessWidget {
           itemCount: homeScreenController.topPodcast.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
-            return Column(
-              children: [
-                SizedBox(
-                  height: size.height / 7.5,
-                  width: size.width / 3.1,
-                  child: CachedNetworkImage(
-                    imageUrl: homeScreenController.topPodcast[index].poster!,
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                          image: DecorationImage(
-                              image: imageProvider, fit: BoxFit.cover)),
-                    ),
-                    placeholder: ((context, url) => const loading()),
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.image_not_supported_outlined,
-                      size: 50,
-                      color: Color.fromARGB(255, 227, 10, 10),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                    width: size.width / 2.4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          homeScreenController.topPodcast[index].title!,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+            return GestureDetector(
+              onTap: () {
+                Get.toNamed(NamedRoute.singlePodcast,arguments: homeScreenController.topPodcast[index]);
+              },
+              child: Padding(
+                padding:  EdgeInsets.only(right: index == 0 ? bodyMargin:15),
+                child: Column(
+                  children: [ 
+                    SizedBox(
+                      height: size.height / 7.5,
+                      width: size.width / 3.1,
+                      child: CachedNetworkImage(
+                        imageUrl: homeScreenController.topPodcast[index].poster!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(16),
+                              ),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover)),
+                        ),
+                        placeholder: ((context, url) => const loading()),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 50,
+                          color: Color.fromARGB(255, 227, 10, 10),
                         ),
                       ),
-                    )),
-              ],
+                    ),
+                    SizedBox(
+                        width: size.width / 2.4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              homeScreenController.topPodcast[index].title!,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
             );
           })),
     );
