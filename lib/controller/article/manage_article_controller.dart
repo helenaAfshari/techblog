@@ -61,8 +61,7 @@ class ManageArticleController extends GetxController{
   });
 
   }
-  storeArticle()async{
-    
+  storeArticle()async{ 
     var fileController = Get.find<FilePickerController>();
       loading.value = true;
       Map<String,dynamic> map = {

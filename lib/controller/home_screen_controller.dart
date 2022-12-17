@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tecblog/Services/dio_service.dart';
 import 'package:tecblog/constant/api_constant.dart';
@@ -12,7 +13,7 @@ class HomeScreenController extends GetxController {
   late Rx<PosterModel> poster = PosterModel().obs;
 
      RxList<TagsModel> tagsList = RxList();
-  RxList<ArticleModel> topVisitedList = RxList();
+    RxList<ArticleModel> topVisitedList = RxList();
     RxList<PodcastModel> topPodcast = RxList();
     RxBool loading = false.obs;
      
@@ -52,4 +53,5 @@ class HomeScreenController extends GetxController {
        loading.value = false;
     }
   }
+
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:tecblog/Services/dio_service.dart';
 import 'package:tecblog/constant/api_constant.dart';
 import 'package:tecblog/models/podcast_file_model.dart';
@@ -10,12 +11,25 @@ SinglePodcastController({this.id});
 RxBool loading = false.obs;
 //list podcasts
 RxList<PodcastFileModel> podcastFileList  = RxList();
-
+late var playList ;
+//برای این که پخش باشد tru
+//وو اگر پخش نبود false
+RxBool playState =  false.obs;
+final player = AudioPlayer();
 
 @override
-onInit(){
+onInit()async{
   super.onInit();
-     getPodcastFile(); 
+  //داخل initگذاشتیم که 
+  //که زمانی که مقداردهی میشود هر پادکستی که میخواهیم رامقداردهی میکند
+  playList = ConcatenatingAudioSource(
+    //که پادکست بعد را بخواند اتوماتیک
+    useLazyPreparation: true,
+    children: [],
+    
+    );
+     await getPodcastFile(); 
+     await player.setAudioSource(playList,initialIndex: 0,initialPosition: Duration.zero);
 
 }
 
@@ -37,8 +51,23 @@ onInit(){
       //حالا اینجا یک لیست دارم میخوام پر کنم
       //هربار داخل پادکست فایل لیست اضافه میکنیم 
       podcastFileList.add(PodcastFileModel.fromJson(element));
+      //هم زمان پلی لیست هم اجرا بشه
+      //و با فایل هایی که از سرور میاد پرشون میکنیم 
+      playList.add(AudioSource.uri(Uri.parse(PodcastFileModel.fromJson(element).file!)));
+
     }
     loading.value = false;
   }
  }
+
+ gettt()async{
+    loading.value  = true;
+    var response =await DioService().getMethod(ApiConstant.podcastFile);
+    if(response.statusCode == 200){
+      for (var element in response.data["files"]) {
+        podcastFileList.add(PodcastFileModel.fromJson(element));
+      }
+    }
+ }
+
 }

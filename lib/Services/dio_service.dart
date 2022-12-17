@@ -5,8 +5,6 @@ import 'package:dio/dio.dart' as dio_service;
 import 'package:get_storage/get_storage.dart';
 import 'package:tecblog/constant/storage_const.dart';
 
-
-
 class DioService {
   Dio dio = Dio();
 
@@ -20,7 +18,7 @@ class DioService {
       return response;
     }).catchError((err){
         if(err is DioError){
-
+       
             return err.response!;
 
         }

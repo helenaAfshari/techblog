@@ -14,19 +14,19 @@ import '../../models/podcast_model.dart';
 
 class PodcastSingle extends StatelessWidget {
 
-   late SinglePodcastController singlePodcastController;
+   late SinglePodcastController controller;
      late PodcastModel podcastModel;
      
 
     PodcastSingle(){
       //این آرگومینت را به homeScreenدادیم
       podcastModel = Get.arguments;
-         singlePodcastController = Get.put(SinglePodcastController(id: podcastModel.id));
+         controller = Get.put(SinglePodcastController(id: podcastModel.id));
     }
 
   @override
   Widget build(BuildContext context) {
-    print(singlePodcastController.id);
+    print(controller.id);
        var textheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
@@ -134,9 +134,9 @@ class PodcastSingle extends StatelessWidget {
                         ),  
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child:singlePodcastController.loading.value==false?  ListView.builder(
+                          child:controller.loading.value==false?  ListView.builder(
                               shrinkWrap: true,
-                              itemCount: singlePodcastController.podcastFileList.length,
+                              itemCount: controller.podcastFileList.length,
                               itemBuilder: (context, index) {           
                               return Padding(
                                 padding:  const EdgeInsets.all(8.0),
@@ -150,11 +150,11 @@ class PodcastSingle extends StatelessWidget {
                                             color: SolidColors.seeMore,
                                             ),
                                              SizedBox(width:Get.width/19,),   
-                                            Text(singlePodcastController.podcastFileList[index].title!,
+                                            Text(controller.podcastFileList[index].title!,
                                             style: textheme.headline4,),  
                                         ],
                                        ),
-                                       Text(singlePodcastController.podcastFileList[index].length!+":00"),
+                                       Text(controller.podcastFileList[index].length!+":00"),
                                   ],
                                 ),
                               );
@@ -184,20 +184,54 @@ class PodcastSingle extends StatelessWidget {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:const [
-                          Icon(
-                            Icons.skip_next,
-                            color: Colors.white,
-                          ),  Icon(
-                            Icons.play_circle_fill,
-                            color: Colors.white,
-                            size: 48,
-                          ),  Icon(
-                            Icons.skip_previous,
-                            color: Colors.white,
-                          ), 
-                            SizedBox(),
-                           Icon(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await controller.player.seekToNext();
+                            },
+                            child: const Icon(
+                              Icons.skip_next,
+                              color: Colors.white,
+                            ),
+                          ),
+                          
+                          
+                            GestureDetector(
+                            onTap: () {
+
+                              controller.player.playing?
+                              controller.player.pause():
+                              controller.player.play();
+
+                               //وضعیت playبودن یا نبودن را میگیره
+                              controller.playState.value  = controller.player.playing;
+
+                              
+                            },
+                            child: Obx(
+                              ()=> Icon(
+                                 controller.playState.value?
+                                  Icons.pause_circle_filled:
+                                 Icons.play_circle_fill,
+                                
+                                 color: Colors.white,
+                                 size: 48,
+                              ),
+                            ),
+                          ),
+                          
+                          
+                            GestureDetector(
+                              onTap: () async {
+                               await controller.player.seekToPrevious();
+                              },
+                              child: const Icon(
+                              Icons.skip_previous,
+                              color: Colors.white,
+                              ),
+                            ), 
+                            const SizedBox(),
+                           const Icon(
                             Icons.repeat,
                             color: Colors.white,
                           ),
