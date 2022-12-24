@@ -19,6 +19,7 @@ class ManageArticleController extends GetxController{
   RxList<ArticleModel> articleList = RxList.empty();
    RxList<TagsModel> tagList = RxList.empty();
  RxBool loading = false.obs;
+
  TextEditingController titleTextEditingController = TextEditingController();
 
  Rx<ArticleInfoModel>articleInfoModel = ArticleInfoModel(
@@ -61,6 +62,11 @@ class ManageArticleController extends GetxController{
   });
 
   }
+   
+
+  
+
+    
   storeArticle()async{ 
     var fileController = Get.find<FilePickerController>();
       loading.value = true;
@@ -72,8 +78,6 @@ class ManageArticleController extends GetxController{
          ApiArticleKeyConstant.userId : GetStorage().read(StorageKey.userId) ,
          ApiArticleKeyConstant.image : await dio.MultipartFile.fromFile(fileController.file.value.path!),
          ApiArticleKeyConstant.command : Commands.store,
-         
-         
       };
       var response = await DioService().postMethod( map, ApiConstant.articlePost); 
       log(response.data.toString());

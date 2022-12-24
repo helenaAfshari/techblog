@@ -24,6 +24,7 @@ class PodcastSingle extends StatelessWidget {
          controller = Get.put(SinglePodcastController(id: podcastModel.id));
     }
 
+
   @override
   Widget build(BuildContext context) {
     print(controller.id);
@@ -132,35 +133,48 @@ class PodcastSingle extends StatelessWidget {
                             ],
                           ),
                         ),  
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:controller.loading.value==false?  ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: controller.podcastFileList.length,
-                              itemBuilder: (context, index) {           
-                              return Padding(
-                                padding:  const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                       Row(
-                                        children: [
-                                          ImageIcon(
-                                            Image.asset(Assets.icons.microphone.path).image,
-                                            color: SolidColors.seeMore,
-                                            ),
-                                             SizedBox(width:Get.width/19,),   
-                                            Text(controller.podcastFileList[index].title!,
-                                            style: textheme.headline4,),  
-                                        ],
-                                       ),
-                                       Text(controller.podcastFileList[index].length!+":00"),
-                                  ],
-                                ),
-                              );
-                            },):const loading(),
-                         
-                        )
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:controller.loading.value==false?  ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.podcastFileList.length,
+                                itemBuilder: (context, index) {           
+                                return GestureDetector(
+                                  onTap: () async {
+                            //اینجا زمانی که روی هر آیتم کلیک کردم از ثانیه صفر شروع بشه به خواندن
+                            await controller.player.seek(Duration.zero,index: index);
+                            controller.currentFileIndex.value = controller.player.currentIndex!;
+                                  },
+                                  child: Padding(
+                                    padding:  const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                           Row(
+                                            children: [
+                                              ImageIcon(
+                                                Image.asset(Assets.icons.microphone.path).image,
+                                                color: SolidColors.seeMore,
+                                                ),
+                                                 SizedBox(width:Get.width/19,),  
+                                                 //اونی که پلی میشه آبی رنگ هست بقیه مشکی 
+                                                Obx(
+                                                  ()=> Text(controller.podcastFileList[index].title!,
+                                                  style:controller.currentFileIndex.value==index? textheme.headline3:
+                                                    textheme.headline4
+                                                  ,),
+                                                ),  
+                                            ],
+                                           ),
+                                           Text(controller.podcastFileList[index].length!+":00"), 
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },):const loading(),
+                           
+                          ),
+                        
                         ],
                         ),
          ), ),
@@ -188,6 +202,7 @@ class PodcastSingle extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await controller.player.seekToNext();
+                              controller.currentFileIndex.value = controller.player.currentIndex!;
                             },
                             child: const Icon(
                               Icons.skip_next,
@@ -195,16 +210,17 @@ class PodcastSingle extends StatelessWidget {
                             ),
                           ),
                           
-                          
                             GestureDetector(
                             onTap: () {
 
                               controller.player.playing?
                               controller.player.pause():
                               controller.player.play();
-
+                          
                                //وضعیت playبودن یا نبودن را میگیره
                               controller.playState.value  = controller.player.playing;
+                              //برای این که روی هر آیتم کلیک شد اونو بخواند
+                              controller.currentFileIndex.value = controller.player.currentIndex!;
 
                               
                             },
@@ -224,6 +240,7 @@ class PodcastSingle extends StatelessWidget {
                             GestureDetector(
                               onTap: () async {
                                await controller.player.seekToPrevious();
+                               controller.currentFileIndex.value = controller.player.currentIndex!;
                               },
                               child: const Icon(
                               Icons.skip_previous,

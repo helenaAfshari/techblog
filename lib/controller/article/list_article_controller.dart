@@ -27,6 +27,7 @@ class ListArticleController extends GetxController {
     }
   }
 
+
   getArticleListWithTagsId(String id) async {
     articleList.clear();
     loading.value = true;
@@ -39,6 +40,9 @@ class ListArticleController extends GetxController {
       });
 
       loading.value = false;
+
     }
   }
+
+  
 }

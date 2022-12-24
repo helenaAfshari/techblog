@@ -66,8 +66,9 @@ class MyApp extends StatelessWidget {
               page:( () => PodcastSingle()),
             ),
       ],
-        home:  SplashScreen(),
-        // home: SinglePodcast(),
+      home: SplashScreen(),
+        // home:  Single(),
+       // home: SinglePodcast(),
         );
   }
 

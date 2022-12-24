@@ -20,11 +20,12 @@ import 'package:tecblog/view/articles/article_list_screen.dart';
 // ignore: must_be_immutable
 class Single extends StatelessWidget {
 
-  var singleArticleController =
-      Get.find<SingleArticleController>();
+  // var singleArticleController =
+  //     Get.find<SingleArticleController>();
+      
+     var singleArticleController = Get.put(SingleArticleController());
 
   Single({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -302,3 +303,13 @@ class Single extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+

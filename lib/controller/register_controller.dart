@@ -90,6 +90,8 @@ class RegisterController extends GetxController{
      
     }
 
+ 
+
     routTowriteBottomSheet(){
           Get.bottomSheet(
               Container(

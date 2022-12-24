@@ -12,6 +12,7 @@ class ArticleContentEditor extends StatelessWidget{
 
    final HtmlEditorController controller = HtmlEditorController();
    var manageArticleController = Get.put(ManageArticleController());
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

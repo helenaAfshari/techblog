@@ -17,6 +17,8 @@ late var playList ;
 RxBool playState =  false.obs;
 final player = AudioPlayer();
 
+//این هم برای این که روی هر ایتم کلیک کردیم اون پادکست را بخواند
+RxInt currentFileIndex = 0.obs;
 @override
 onInit()async{
   super.onInit();
@@ -60,14 +62,5 @@ onInit()async{
   }
  }
 
- gettt()async{
-    loading.value  = true;
-    var response =await DioService().getMethod(ApiConstant.podcastFile);
-    if(response.statusCode == 200){
-      for (var element in response.data["files"]) {
-        podcastFileList.add(PodcastFileModel.fromJson(element));
-      }
-    }
- }
 
 }
