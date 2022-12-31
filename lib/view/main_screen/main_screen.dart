@@ -11,9 +11,6 @@ import 'package:tecblog/gen/assets.gen.dart';
 import 'package:tecblog/view/main_screen/home_screen.dart';
 import 'package:tecblog/view/main_screen/profile_screen.dart';
 
-
-
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 // ignore: must_be_immutable

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 
 import 'package:dio/dio.dart';
@@ -30,7 +31,9 @@ class DioService {
         }
     });
   }
-      
+
+
+ 
  
 
   Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
@@ -59,7 +62,24 @@ class DioService {
 
     });
   }
-
+      
+      Future<dynamic> p(String url)async{
+          dio.options.headers['content_type']  ='f';
+          return dio.post(
+            url,
+            options: Options(
+              responseType: ResponseType.json,
+              method: 'POST',
+            )
+          ).then((response) {
+            print(response);
+              return response;
+          }).catchError((err){
+              if(err is DioError){
+                   return err.response!;
+              }
+          });
+      }
 
 }
 

@@ -1,7 +1,5 @@
 
 
-
-
 import 'package:flutter/material.dart';
 import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/constant/my_strings.dart';
@@ -9,15 +7,11 @@ import 'package:tecblog/component/mycomponent.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 
 
-
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     Key? key,
    
   }) : super(key: key);
-
- 
 
   @override
   Widget build(BuildContext context) {

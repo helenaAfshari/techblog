@@ -116,7 +116,7 @@ class ManageArticleScreen extends StatelessWidget {
                   : articleEmptyState(textTheme),
             ),
       
-       bottomNavigationBar:   Padding(
+       bottomNavigationBar: Padding(
          padding: const EdgeInsets.all(8.0),
          child: ElevatedButton(
           style:  ButtonStyle(fixedSize: MaterialStateProperty.all(Size(Get.width/3,56))),
@@ -153,7 +153,4 @@ class ManageArticleScreen extends StatelessWidget {
         ),
       );
   }
-
-  
-
 }

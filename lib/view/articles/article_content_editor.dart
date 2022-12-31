@@ -41,14 +41,13 @@ class ArticleContentEditor extends StatelessWidget{
                   ),
 
                 ),
-
             ],
           ),
         ),
          ),
     );
   }
-
+    
 
 }
 
