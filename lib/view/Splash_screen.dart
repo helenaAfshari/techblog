@@ -17,15 +17,11 @@ class SplashScreen extends StatefulWidget{
 
 class _SplashScreenState extends State<SplashScreen> {
 
-
    @override
    void initState() {
    //چندثانیه صبر کن و بعد یک کاری انجام بده
    Future.delayed(const Duration(seconds: 3 )).then((value) =>{
-     
       Get.offAndToNamed(NamedRoute.routeMainScreen),
-          
-      
    } );
     super.initState();
   }

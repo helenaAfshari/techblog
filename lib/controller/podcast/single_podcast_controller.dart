@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tecblog/Services/dio_service.dart';
@@ -9,8 +11,10 @@ class SinglePodcastController extends GetxController{
 var id;
 SinglePodcastController({this.id});
 RxBool loading = false.obs;
+RxBool isLoopAll = false.obs;
 //list podcasts
 RxList<PodcastFileModel> podcastFileList  = RxList();
+
 late var playList ;
 //برای این که پخش باشد tru
 //وو اگر پخش نبود false
@@ -62,6 +66,76 @@ onInit()async{
   }
  }
 
+  
+  //  RxDouble progressValue = 0.0.obs;
+  //    startProgress(){
+  //     const tick =Duration(seconds: 1);
+  //     int duration = player.duration!.inSeconds;
+  //     //اینجا درصد را حساب میکنیم
+  //     //1توتال اون درصد هست
+  //     var step = 1/duration;
+  //     timer = Timer.periodic(tick, (timer) {
+  //        duration--;
+  //      //اضافه بشه جلوتر بیاد
+  //         progressValue.value += step;
+  //        //زمانی که تایمر ما کوچک تر مساوی صفرشده باشد تایمر ما کنسل شود
+  //        if(duration <=0){
+  //          timer.cancel();
+  //        }
 
+  //     },);
+      
+  //    }
+
+  Rx<Duration>progressValue = Duration(seconds: 0).obs;
+   Rx<Duration>bufferedValue = Duration(seconds: 0).obs;
+   Timer?timer;
+
+   startProgress(){
+    //مشخص میکند که هرچند میلی یک بار کدمون را اجرا کند
+    const tick = Duration(seconds: 1);
+    //این هم duration کل تایمرمون هست
+    int duration = player.duration!.inSeconds - player.position.inSeconds ;
+   // این همونجایی میاد که سیک کردیم 
+   // این تابع برای ممکن با جلو زدن سیک بار را تغییر بدیم یا با انتخاب کردن که میاد اول پروگرس بار را ریست کنیم
+   //پس برای هر بار تغییر کردن باید تایمر را nullکنیم
+   //به علت این که دوتا تایمر روی هم نیوفته و برناممون دچار باگ نباشه
+    if(timer != null){
+      if(timer!.isActive){
+          timer!.cancel();
+          timer = null;
+      }
+    }
+      timer = Timer.periodic(tick, (timer) {
+        //به صفر برسد با هربار اجرا
+          duration--;
+          progressValue.value=player.position;
+          bufferedValue.value=player.bufferedPosition;
+          //حالا کوچک تر مساوی صفر شد تایمر را کنسل کن
+          if(duration<=0){
+            timer.cancel();
+            progressValue.value=Duration(seconds: 0);
+            bufferedValue.value=Duration(seconds: 0);
+          }
+      },);
+   }
+   f(){
+      const tick = Duration(seconds: 1);
+      int duration = player.duration!.inSeconds - player.position.inSeconds;
+      if(timer!=null){
+         if(timer!.isActive){
+            
+         }
+      }
+   }
+   setLoopMode(){
+     if(isLoopAll.value){
+        isLoopAll.value=false;
+        player.setLoopMode(LoopMode.off);
+     }else{
+      isLoopAll.value = true;
+      player.setLoopMode(LoopMode.all);
+     }
+   }
 }
 

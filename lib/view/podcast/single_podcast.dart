@@ -1,3 +1,4 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -173,12 +174,10 @@ class PodcastSingle extends StatelessWidget {
                                 );
                               },):const loading(),
                            
-                          ),
-                        
+                          ),            
                         ],
                         ),
-         ), ),
-            
+         ), ),   
             Positioned(
               bottom: 8,
               right: Dimens.bodyMargin,
@@ -191,11 +190,22 @@ class PodcastSingle extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      LinearPercentIndicator(
-                        percent: 1.0,
-                        backgroundColor: Colors.white,
-                        progressColor: Colors.orange,
-                      ),
+                       Obx(
+                         ()=> ProgressBar(
+                          timeLabelTextStyle: TextStyle(color: Colors.white) ,
+                          thumbColor: Colors.yellow,
+                          baseBarColor: Colors.white,
+                          buffered: controller.bufferedValue.value,
+                          progressBarColor: Colors.orange,
+                          progress: controller.progressValue.value,
+                          onSeek: (position) {
+                            controller.player.seek(position);
+                            
+                            controller.player.playing?
+                            controller.startProgress():controller.timer!.cancel();
+                          },
+                          total: controller.player.duration??Duration(seconds: 0)),
+                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -212,17 +222,23 @@ class PodcastSingle extends StatelessWidget {
                           
                             GestureDetector(
                             onTap: () {
+                                  
+                              
+                              controller.player.playing?
+                              controller.timer!.cancel():
+                              controller.startProgress();
+
 
                               controller.player.playing?
                               controller.player.pause():
                               controller.player.play();
-                          
+                               
+                               
+                                     
                                //وضعیت playبودن یا نبودن را میگیره
                               controller.playState.value  = controller.player.playing;
                               //برای این که روی هر آیتم کلیک شد اونو بخواند
                               controller.currentFileIndex.value = controller.player.currentIndex!;
-
-                              
                             },
                             child: Obx(
                               ()=> Icon(
@@ -236,7 +252,6 @@ class PodcastSingle extends StatelessWidget {
                             ),
                           ),
                           
-                          
                             GestureDetector(
                               onTap: () async {
                                await controller.player.seekToPrevious();
@@ -248,10 +263,17 @@ class PodcastSingle extends StatelessWidget {
                               ),
                             ), 
                             const SizedBox(),
-                           const Icon(
-                            Icons.repeat,
-                            color: Colors.white,
-                          ),
+                           Obx(
+                              ()=>GestureDetector(
+                                onTap: () {
+                                  controller.setLoopMode();
+                                },
+                                child: Icon(
+                                Icons.repeat,
+                                color:controller.isLoopAll.value?Colors.blue: Colors.white,
+                                                       ),
+                              ),
+                           ),
                         ],
                       )
                     ],
