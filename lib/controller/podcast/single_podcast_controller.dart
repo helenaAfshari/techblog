@@ -104,6 +104,7 @@ onInit()async{
       if(timer!.isActive){
           timer!.cancel();
           timer = null;
+          
       }
     }
       timer = Timer.periodic(tick, (timer) {
