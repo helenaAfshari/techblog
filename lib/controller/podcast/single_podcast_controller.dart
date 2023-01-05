@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tecblog/Services/dio_service.dart';
@@ -100,35 +101,32 @@ onInit()async{
    // این تابع برای ممکن با جلو زدن سیک بار را تغییر بدیم یا با انتخاب کردن که میاد اول پروگرس بار را ریست کنیم
    //پس برای هر بار تغییر کردن باید تایمر را nullکنیم
    //به علت این که دوتا تایمر روی هم نیوفته و برناممون دچار باگ نباشه
+   //که اون تایمرهای قبلی را پاک کند
     if(timer != null){
       if(timer!.isActive){
           timer!.cancel();
           timer = null;
-          
       }
     }
       timer = Timer.periodic(tick, (timer) {
         //به صفر برسد با هربار اجرا
           duration--;
+          //توی هر اجرایی که داری پوزیشن را که میدونیم در چه ثانیه ایی هست را به پروگرس بده
           progressValue.value=player.position;
+          //اینجا هم بافرمون را میخواییم اپدیت کنیم که uiما آپدیت شود
           bufferedValue.value=player.bufferedPosition;
           //حالا کوچک تر مساوی صفر شد تایمر را کنسل کن
+          //چون اینجا متوجه میشیم که موزیک تمام شده
           if(duration<=0){
+           //کنسل میشود که از نو اجرا بشه اهنگ بعدی
             timer.cancel();
+            //این دوتارا صفر میکنیم چون با کنسل شدن تایمر پروگرس و بافر برگردن به ابتدای اهنگ
             progressValue.value=Duration(seconds: 0);
             bufferedValue.value=Duration(seconds: 0);
           }
       },);
    }
-   f(){
-      const tick = Duration(seconds: 1);
-      int duration = player.duration!.inSeconds - player.position.inSeconds;
-      if(timer!=null){
-         if(timer!.isActive){
-            
-         }
-      }
-   }
+
    setLoopMode(){
      if(isLoopAll.value){
         isLoopAll.value=false;
