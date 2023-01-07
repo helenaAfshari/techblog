@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -96,6 +97,7 @@ onInit()async{
     //مشخص میکند که هرچند میلی یک بار کدمون را اجرا کند
     const tick = Duration(seconds: 1);
     //این هم duration کل تایمرمون هست
+    //برای این منها کردیم که هر جای پروگرس زدیم جلو کم بشه از تایمش
     int duration = player.duration!.inSeconds - player.position.inSeconds ;
    // این همونجایی میاد که سیک کردیم 
    // این تابع برای ممکن با جلو زدن سیک بار را تغییر بدیم یا با انتخاب کردن که میاد اول پروگرس بار را ریست کنیم
@@ -109,8 +111,10 @@ onInit()async{
       }
     }
       timer = Timer.periodic(tick, (timer) {
+
         //به صفر برسد با هربار اجرا
           duration--;
+          log("duration: $duration ===> index: ${player.currentIndex}");
           //توی هر اجرایی که داری پوزیشن را که میدونیم در چه ثانیه ایی هست را به پروگرس بده
           progressValue.value=player.position;
           //اینجا هم بافرمون را میخواییم اپدیت کنیم که uiما آپدیت شود
@@ -127,6 +131,12 @@ onInit()async{
       },);
    }
 
+    timerCheck(){
+       if(player.playing){
+          startProgress();
+       }
+    }
+
    setLoopMode(){
      if(isLoopAll.value){
         isLoopAll.value=false;
@@ -137,4 +147,6 @@ onInit()async{
      }
    }
 }
+
+
 

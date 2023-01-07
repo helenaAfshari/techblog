@@ -15,7 +15,6 @@ import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 
-
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   //این قسمت برای این که رنگ نوبار و ایکون های گوشی مثل وای فای اینارو چگونه نشان بده خودمون دستی دادیم

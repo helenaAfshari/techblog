@@ -57,6 +57,7 @@ class PodcastSingle extends StatelessWidget {
                                     Image.asset(Assets.images.singlePlaceHolder.path)),
                               ),
                             ),
+
                             Positioned(
                                 top: 0,
                                 left: 0,
@@ -134,6 +135,7 @@ class PodcastSingle extends StatelessWidget {
                             ],
                           ),
                         ),  
+                        //file list
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child:controller.loading.value==false?  ListView.builder(
@@ -145,6 +147,7 @@ class PodcastSingle extends StatelessWidget {
                             //اینجا زمانی که روی هر آیتم کلیک کردم از ثانیه صفر شروع بشه به خواندن
                             await controller.player.seek(Duration.zero,index: index);
                             controller.currentFileIndex.value = controller.player.currentIndex!;
+                            controller.timerCheck();
                                   },
                                   child: Padding(
                                     padding:  const EdgeInsets.all(8.0),
@@ -177,7 +180,9 @@ class PodcastSingle extends StatelessWidget {
                           ),            
                         ],
                         ),
-         ), ),   
+         ), ),  
+
+            //player manager 
             Positioned(
               bottom: 8,
               right: Dimens.bodyMargin,
@@ -213,6 +218,7 @@ class PodcastSingle extends StatelessWidget {
                             onTap: () async {
                               await controller.player.seekToNext();
                               controller.currentFileIndex.value = controller.player.currentIndex!;
+                              controller.timerCheck();
                             },
                             child: const Icon(
                               Icons.skip_next,
@@ -239,6 +245,7 @@ class PodcastSingle extends StatelessWidget {
                               controller.playState.value  = controller.player.playing;
                               //برای این که روی هر آیتم کلیک شد اونو بخواند
                               controller.currentFileIndex.value = controller.player.currentIndex!;
+
                             },
                             child: Obx(
                               ()=> Icon(
@@ -256,6 +263,7 @@ class PodcastSingle extends StatelessWidget {
                               onTap: () async {
                                await controller.player.seekToPrevious();
                                controller.currentFileIndex.value = controller.player.currentIndex!;
+                               controller.timerCheck();
                               },
                               child: const Icon(
                               Icons.skip_previous,
