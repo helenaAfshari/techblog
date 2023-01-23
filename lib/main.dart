@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tecblog/binding.dart';
+import 'package:tecblog/route_manager/binding.dart';
 import 'package:tecblog/constant/my_colors.dart';
+import 'package:tecblog/route_manager/names.dart';
+import 'package:tecblog/route_manager/pages.dart';
 import 'package:tecblog/view/Splash_screen.dart';
 import 'package:tecblog/view/articles/manage_article.dart';
 import 'package:tecblog/view/articles/single_manage_article.dart';
@@ -14,6 +14,7 @@ import 'package:tecblog/view/main_screen/main_screen.dart';
 import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
+
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -38,34 +39,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-
+      getPages: Pages.pages,
+       initialRoute: NamedRoute.initialRoute,
       initialBinding: RegisterBinding(),
         locale: const Locale('fa'),
         theme: lightTheme(),
         debugShowCheckedModeBanner: false,
-        getPages: [
-           GetPage(name: NamedRoute.routeMainScreen, page: () => MainScreen(),binding: RegisterBinding()),
-            GetPage(name: NamedRoute.routeSingleArticle, page: () => Single(),binding: ArticleBinding()),
-           
-            GetPage(
-              name: NamedRoute.routemanageArticle,
-             page: (() => ManageArticleScreen()),
-             binding: ArticleManagerBinding()),
-
-              GetPage(
-              name: NamedRoute.singleManageArticle,
-             page: (() => SingleManageArticle()),
-             binding: ArticleManagerBinding()),  
-             GetPage(
-              name: NamedRoute.singleManageArticle,
-             page: (() => SingleManageArticle()),
-            ),
-            GetPage(
-              name: NamedRoute.singlePodcast, 
-              page:( () => PodcastSingle()),
-            ),
-      ],
-      home: SplashScreen(),
+      
         // home:  Single(),
        // home: SinglePodcast(),
         );
@@ -139,16 +119,5 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class NamedRoute{
- 
- //اینجا به صورت staticکار میکند 
- //اگر از این کانستراکتور استفاده کنیم
- NamedRoute._();
 
-static String routeMainScreen = "/MainScreen";
-static String routeSingleArticle = "/SingleArticle";
-static String routemanageArticle = "/ManageArticle";
-static String singleManageArticle = "/SingleManageArticle";
-static String singlePodcast = "/singlePodcast";
-}
 

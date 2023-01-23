@@ -6,6 +6,7 @@ import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tecblog/main.dart';
+import 'package:tecblog/route_manager/names.dart';
 import 'package:tecblog/view/main_screen/main_screen.dart';
 
 class SplashScreen extends StatefulWidget{

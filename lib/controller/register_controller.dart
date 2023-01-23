@@ -9,6 +9,7 @@ import 'package:tecblog/constant/api_constant.dart';
 import 'package:tecblog/constant/storage_const.dart';
 import 'package:tecblog/gen/assets.gen.dart';
 import 'package:tecblog/main.dart';
+import 'package:tecblog/route_manager/names.dart';
 import 'package:tecblog/view/main_screen/main_screen.dart';
 import 'package:tecblog/view/register/register_intro.dart';
 

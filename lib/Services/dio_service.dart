@@ -14,7 +14,7 @@ class DioService {
   Future<dynamic> getMethod(String url) async {
     //اینجا نوع header را تعیین کردیم
     //برای این که بدونیم content-Typeچه جوری هست
-    dio.options.headers['content-Type'] = 'application/json';
+    
 
     //اینجا باید درخواستمون را ایجاد کنیم 
     return await dio

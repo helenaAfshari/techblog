@@ -9,6 +9,7 @@ import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/main.dart';
 import 'package:tecblog/models/fake_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:tecblog/route_manager/names.dart';
 import 'package:tecblog/view/articles/article_list_screen.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 import '../../gen/assets.gen.dart';

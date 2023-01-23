@@ -5,11 +5,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:tecblog/binding.dart';
+import 'package:tecblog/route_manager/binding.dart';
 import 'package:tecblog/component/mycomponent.dart';
 import 'package:tecblog/controller/article/list_article_controller.dart';
 import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/main.dart';
+import 'package:tecblog/route_manager/names.dart';
 import 'package:tecblog/view/articles/single.dart';
 
 
