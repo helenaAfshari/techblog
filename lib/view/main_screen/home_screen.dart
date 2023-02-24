@@ -11,6 +11,7 @@ import 'package:tecblog/models/fake_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:tecblog/route_manager/names.dart';
 import 'package:tecblog/view/articles/article_list_screen.dart';
+import 'package:tecblog/view/podcast/podcast_list.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 import '../../gen/assets.gen.dart';
 
@@ -54,7 +55,8 @@ class HomeScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () => Get.to(ArticleListScreen(title: 'مقالات')),
                             child: SeeMoreBlog(
-                                bodyMargin: bodyMargin, textTheme: textTheme, title: 'مشاهده داغ ترین نوشته ها',),
+                                bodyMargin: bodyMargin, textTheme: textTheme,
+                                 title: 'مشاهده داغ ترین نوشته ها',),
                           ),
 
                           topVisited(),
@@ -67,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                           ),
 
                           //podcast
-
+                            
                           topPodcasts(),
 
                           const SizedBox(
@@ -325,9 +327,12 @@ class SeeMorePodcast extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-            child: Text(
-              MyStrings.viewHotestPadCasts,
-              style: textTheme.headline3,
+            child: GestureDetector(
+              onTap: () => Get.to(HotPodcastList(title: "پادکست های مورد علاقه",)),
+              child: Text(
+                MyStrings.viewHotestPadCasts,
+                style: textTheme.headline3,
+              ),
             ),
           )
         ],

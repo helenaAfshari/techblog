@@ -24,8 +24,6 @@ class PodcastSingle extends StatelessWidget {
       podcastModel = Get.arguments;
          controller = Get.put(SinglePodcastController(id: podcastModel.id));
     }
-
-
   @override
   Widget build(BuildContext context) {
     print(controller.id);
