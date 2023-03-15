@@ -189,12 +189,11 @@ class BottomNavigation extends StatelessWidget {
                   onPressed: () {
                     //TODO check Login sTatus
                      Get.find<RegisterController>().routTowriteBottomSheet();   
-                     
                   },
                   icon: ImageIcon(
+                    
                     AssetImage(Assets.icons.writer.path),
                     color: Colors.white,
-                    
                   ),
                 ),
                 IconButton(

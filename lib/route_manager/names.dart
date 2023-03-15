@@ -12,4 +12,5 @@ static String routemanageArticle = "/ManageArticle";
 static String singleManageArticle = "/SingleManageArticle";
 static String singlePodcast = "/singlePodcast";
 static String initialRoute = "/";
+static String podcastList = "/HotPodcastList";
 }

@@ -127,11 +127,9 @@ class RegisterController extends GetxController{
                           Get.toNamed(NamedRoute.routemanageArticle);
                         },
                         child: Container(
-                          color: Color.fromARGB(255, 247, 246, 245),
+                          color: Color.fromARGB(255, 253, 252, 251),
                           child: Row(
-                            
                             children: [
-                             
                               Image.asset(Assets.icons.writing.path,height: 32,),
                               const SizedBox(width: 8,),
                               const Text("مدیریت مقاله ها")
@@ -140,8 +138,8 @@ class RegisterController extends GetxController{
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          
+                        onTap: () { 
+                          Get.toNamed(NamedRoute.podcastList);
                         },
                         child: Container(
                           color: Color.fromARGB(255, 253, 253, 252),
@@ -149,12 +147,11 @@ class RegisterController extends GetxController{
                             children: [
                               Image.asset(Assets.icons.podcast.path,height: 32,),
                               const SizedBox(width: 8,),
-                              const Text("مدیریت پادکست ها")
+                              const Text("مدیریت پادکست ها"),
                             ],
                           ),
                         ),
                       ),
-                    
                   ],
                   ),
 

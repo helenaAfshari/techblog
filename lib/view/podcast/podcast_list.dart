@@ -47,7 +47,9 @@ class HotPodcastList extends StatelessWidget {
             itemBuilder: ((context, index) {
               // return Text(homeScreenController.topPodcast[index].title!,);
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(NamedRoute.singlePodcast,arguments: homeScreenController.topPodcast[index]);
+                },
                 child: Column(
                   children: [
                     Row(

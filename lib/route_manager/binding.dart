@@ -1,6 +1,7 @@
 
 import 'package:get/get.dart';
 import 'package:tecblog/controller/article/list_article_controller.dart';
+import 'package:tecblog/controller/podcast/single_podcast_controller.dart';
 import 'package:tecblog/controller/register_controller.dart';
 import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/view/articles/manage_article.dart';
@@ -25,7 +26,6 @@ class RegisterBinding implements Bindings{
     Get.put(RegisterController());
     
   }
-
 }
 
 class ArticleManagerBinding implements Bindings{
@@ -36,6 +36,17 @@ class ArticleManagerBinding implements Bindings{
  Get.lazyPut(() => ManageArticleController());
    
 
+  }
+
+}
+
+class SinglePodcastBinding implements Bindings{
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
+
+   Get.put(SinglePodcastController());
+   
   }
 
 }

@@ -7,6 +7,7 @@ import 'package:tecblog/view/articles/manage_article.dart';
 import 'package:tecblog/view/articles/single.dart';
 import 'package:tecblog/view/articles/single_manage_article.dart';
 import 'package:tecblog/view/main_screen/main_screen.dart';
+import 'package:tecblog/view/podcast/podcast_list.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 
 class Pages{
@@ -38,6 +39,11 @@ class Pages{
               name: NamedRoute.singlePodcast,
               page: () => PodcastSingle(),
               
+              ),
+               GetPage(
+              name: NamedRoute.podcastList,
+              page: () => HotPodcastList(title: '',),
+              binding: SinglePodcastBinding(),
               ),
 
         ];
