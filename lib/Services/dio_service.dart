@@ -32,16 +32,14 @@ class DioService {
     });
   }
 
-  Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
+   Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
     dio.options.headers['content-Type'] = 'application/json';
-    
     var token = GetStorage().read(StorageKey.token);
-    
-    if(token!=null){
-      dio.options.headers['authorization'] = '$token';
+    if (token!=null) {
+          dio.options.headers['authorization'] = '$token';
     }
-            
-  return await dio
+
+    return await dio
         .post(url,
             data: dio_service.FormData.fromMap(map),
             options: Options(responseType: ResponseType.json, method: 'POST'))
@@ -55,12 +53,12 @@ class DioService {
       if(err is DioError){
         return err.response!;
       }
-
     });
   }
-      
- 
-
 }
+
+
+      
+
 
 

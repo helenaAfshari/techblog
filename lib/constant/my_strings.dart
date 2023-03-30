@@ -23,6 +23,11 @@ static const String articleEmpty = """
   هنوز هیچ مقاله ای به جامعه گیک های فارسی 
 اضافه نکردی !!!
 """;
+static const String podcastEmpty = """  
+
+  هنوز هیچ پادکست ای به جامعه گیک های فارسی 
+اضافه نکردی !!!
+""";
 
 static const String insertYoureEmail = "لطفا ایمیلتو وارد کن";
 static const String activate = "کد فعال سازی رو وارد کن ";

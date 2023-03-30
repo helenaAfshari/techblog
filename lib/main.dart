@@ -15,6 +15,8 @@ import 'package:tecblog/view/my_http_overrides.dart';
 import 'package:tecblog/view/articles/single.dart';
 import 'package:tecblog/view/podcast/single_podcast.dart';
 
+import 'view/podcast/single_manage_podcast.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 
 Future<void> main() async {
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(),
         debugShowCheckedModeBanner: false,
       
-        // home:  Single(),
+         home:  SingleManagePodcast(),
        // home: SinglePodcast(),
         );
   }
@@ -120,5 +122,132 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// import 'package:flutter/material.dart';
 
+// import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+
+// void main() => runApp(MyApp());
+
+// class MyApp extends StatelessWidget {
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Time Picker Spinner Demo',
+//       theme: ThemeData(
+
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: MyHomePage(title: 'Flutter Time Picker Spinner Demo'),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   MyHomePage({Key? key, required this.title}) : super(key: key);
+
+
+//   final String title;
+
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+
+//   DateTime _dateTime = DateTime.now();
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(widget.title),
+//       ),
+  //     body: new Container(
+  //       padding: EdgeInsets.only(
+  //           top: 100
+  //       ),
+  //       child: new Column(
+  //         children: <Widget>[
+  //          // hourMinute12H(),
+  //          //  hourMinute15Interval(),
+  //          hourMinuteSecond(),
+  //          //hourMinute12HCustomStyle(),
+  //           new Container(
+  //             margin: EdgeInsets.symmetric(
+  //                 vertical: 20
+  //             ),
+  //             child: new Text(
+  //                   _dateTime.minute.toString().padLeft(1, '0') + ':' +
+  //                   _dateTime.second.toString().padLeft(1, '0'),
+  //               style: TextStyle(
+  //                 fontSize: 24,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     )
+  //   );
+  // }
+
+
+//   //SAMPLE
+//   Widget hourMinute12H(){
+//     return new TimePickerSpinner(
+//       is24HourMode: false,
+
+//       onTimeChange: (time) {
+//         setState(() {
+//           _dateTime = time;
+//         });
+//       },
+//     );
+//   }
+//   Widget hourMinuteSecond(){
+//     return new TimePickerSpinner(
+//       isShowSeconds: true,
+     
+//       onTimeChange: (time) {
+//         setState(() {
+//           _dateTime = time;
+//         });
+//       },
+//     );
+//   }
+  
+//   // Widget hourMinute15Interval(){
+//   //   return new TimePickerSpinner(
+      
+//   //     minutesInterval: 1,
+//   //     onTimeChange: (time) {
+//   //       setState(() {
+//   //         _dateTime = time;
+//   //       });
+//   //     },
+//   //   );
+//   // }
+//   Widget hourMinute12HCustomStyle(){
+//     return new TimePickerSpinner(
+      
+//       normalTextStyle: TextStyle(
+//         fontSize: 24,
+//         color: Colors.deepOrange
+//       ),
+//       highlightedTextStyle: TextStyle(
+//         fontSize: 24,
+//         color: Colors.yellow
+//       ),
+      
+//       itemHeight: 80,
+
+//       onTimeChange: (time) {
+//         setState(() {
+//           _dateTime = time;
+//         });
+//       },
+//     );
+//   }
+// }
 

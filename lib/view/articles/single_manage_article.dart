@@ -39,7 +39,7 @@ class SingleManageArticle extends StatelessWidget {
        title: "عنوان مقاله",
        titleStyle:const TextStyle(
         color: SolidColors.scafoldBg) ,
-       
+        
        content:  TextField(
         controller: manageArticleController.titleTextEditingController,
         keyboardType: TextInputType.text,

@@ -10,7 +10,7 @@ class PodcastFileModel{
   String? title;
   String? length;  
 
-  PodcastFileModel();
+  PodcastFileModel(this.title);
 
   PodcastFileModel.fromJson(Map<String,dynamic>element){
     

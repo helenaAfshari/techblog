@@ -139,7 +139,7 @@ class RegisterController extends GetxController{
                       ),
                       GestureDetector(
                         onTap: () { 
-                          Get.toNamed(NamedRoute.podcastList);
+                          Get.toNamed(NamedRoute.podcastManageList);
                         },
                         child: Container(
                           color: Color.fromARGB(255, 253, 253, 252),

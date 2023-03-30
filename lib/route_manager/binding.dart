@@ -7,6 +7,7 @@ import 'package:tecblog/controller/article/single_article_controller.dart';
 import 'package:tecblog/view/articles/manage_article.dart';
 
 import '../controller/article/manage_article_controller.dart';
+import '../controller/podcast/manage_podcast_controller.dart';
 
 class ArticleBinding implements Bindings{
   @override
@@ -40,13 +41,14 @@ class ArticleManagerBinding implements Bindings{
 
 }
 
-class SinglePodcastBinding implements Bindings{
+class podcastManagerBinding implements Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
 
-   Get.put(SinglePodcastController());
-   
+   //Get.put(SinglePodcastController());
+    Get.lazyPut(() => SinglePodcastController());
+
   }
 
 }

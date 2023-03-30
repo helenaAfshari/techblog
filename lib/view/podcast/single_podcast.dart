@@ -18,7 +18,6 @@ class PodcastSingle extends StatelessWidget {
    late SinglePodcastController controller;
      late PodcastModel podcastModel;
      
-
     PodcastSingle(){
       //این آرگومینت را به homeScreenدادیم
       podcastModel = Get.arguments;

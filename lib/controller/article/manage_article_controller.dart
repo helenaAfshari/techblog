@@ -43,8 +43,6 @@ class ManageArticleController extends GetxController{
     //TODO get userid from getStorage ApiConstant.getArticleList+userid
     // var response = await DioService().getMethod(ApiConstant.PublishedByMe+GetStorage().read(StorageKey.userId));
         var response = await DioService().getMethod(ApiConstant.PublishedByMe + "1");
-
-      
     if (response.statusCode == 200) {
       response.data.forEach((element) {
         articleList.add(ArticleModel.fromJson(element));
@@ -58,15 +56,11 @@ class ManageArticleController extends GetxController{
   updateTitle(){
   articleInfoModel.update((val) {
     val!.title = titleTextEditingController.text;
-              
   });
 
   }
    
 
-  
-
-    
   storeArticle()async{ 
     var fileController = Get.find<FilePickerController>();
       loading.value = true;
