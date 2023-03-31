@@ -24,9 +24,13 @@ class ManagePodcastController extends GetxController{
   
    // var selectedTime = TimeOfDay.now().replacing(hour: 0,minute: 0).obs;
   RxBool loading = false.obs;
-  TextEditingController titleTextEditingController =TextEditingController();
+  TextEditingController titleTextEditingControllerMinute =TextEditingController();
+    TextEditingController titleTextEditingControllerHour =TextEditingController();
+
   RxInt? input=0.obs;
-  RxBool isvisible = false.obs ;
+  RxInt? inputHoure = 0.obs;
+  RxBool isvisibleMinute = false.obs ;
+  RxBool isvisibleHour = false.obs ;
   var userId = '';
    var catId = '';
 
@@ -43,7 +47,7 @@ class ManagePodcastController extends GetxController{
      
    titleUpdate()async{
      Map<String,dynamic>map={
-       'title':titleTextEditingController.text,
+       'title':titleTextEditingControllerMinute.text,
         'command':'store_title',
         'cat_id':catId,
         'user_id':userId,

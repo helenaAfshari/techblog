@@ -316,7 +316,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
          
            TextField(
             //controller: managePodcastController.titleTextEditingController,
-            controller: managePodcastController.titleTextEditingController,
+            controller: managePodcastController.titleTextEditingControllerMinute,
             keyboardType: TextInputType.text,
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 6, 11),
@@ -382,7 +382,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                          decoration: const 
                          BoxDecoration(
                           shape: BoxShape.rectangle,
-                          color: Color.fromARGB(255, 249, 249, 248)
+                          color: Colors.white,
                           ),
                           child: Column(
                             children: [
@@ -399,91 +399,146 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                           ),
                         ),
                        SizedBox(width: Get.width/14,),
+                     
                           Container(
-                           height:Get.height/6,
+                          height:Get.height/6,
                           width: Get.width/2.1,
-                                  
                             decoration: const BoxDecoration(shape: BoxShape.rectangle,
-                            color: Color.fromARGB(255, 249, 249, 248),),
+                            color: Colors.white),
                            // child: managePodcastController.chooseTime(),
-                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                           child: Obx(
+                             () =>  Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                  SizedBox(
+                                    height:Dimens.bodyMargin*5 ,
+                                    width: Dimens.bodyMargin*1.7,
+                                   
+                                  child: Column(
+                                  children: [
                                 Padding(
-                                //  padding: const EdgeInsets.only(top: 30),
-                                padding: const EdgeInsets.only(bottom: 30),
-                                 child: SizedBox(
-                                   height:Dimens.bodyMargin*5 ,
-                                   width: Dimens.bodyMargin*1.7,
-                                  
-                          child:  Obx(
-                            () =>  Column(
-                                children: [
-                              TextFormField(   
-                                maxLength: 2,
-                                controller: managePodcastController.titleTextEditingController,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: "Enter Number",
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: TextField(   
+                                    maxLength: 2,
+                                    controller: managePodcastController.titleTextEditingControllerMinute,
+                                    keyboardType: TextInputType.number,
+                                      cursorColor: Colors.black,
+                                       style: const TextStyle(color: Colors.black),
+                                    decoration: const InputDecoration(
+                                        fillColor: Color.fromARGB(255, 203, 202, 202),
+                                     border: OutlineInputBorder(),
+                                     hintText: "Enter Number",
+                                    ),
+                                    
+                                    onChanged: (value) {
+                                                          
+                                    managePodcastController.input!.value=int.tryParse(
+                                    value)!;
+                                    if(managePodcastController.input!>60){
+                                        managePodcastController.isvisibleMinute.value=true;
+                                    
+                                    }else{
+                                     managePodcastController.isvisibleMinute.value=false;
+                                     value="";
+                                    }
+                                    }),
                                 ),
-                                
-                                 onChanged: (value) {
-                                                       
-                                managePodcastController.input!.value=int.tryParse(
-                                 value)!;
-                                if(managePodcastController.input!>60){
-                                     managePodcastController.isvisible.value=true;
-                                 
-                                 }else{
-                                  managePodcastController.isvisible.value=false;
-                                  value="";
-                                 }
-                                 }),
-                                 Visibility(
-                                        visible: managePodcastController.isvisible.value, child: const Padding(
-                                             padding:  EdgeInsets.all(8.0),
-                                             child: Text("Erorrr",
-                                             style: TextStyle(color: Colors.red),),
-                                           ) ,),
-                                
-                                ],
-                              ),
-                          ),
-                          
-                                 ),
-                               ),
-                             
-                              //  Padding(
-                              //    padding: const EdgeInsets.all(8.0),
-                              //    child: Text(managePodcastController.input!.value.toString(),
-                              //    style: TextStyle(color: Colors.red),),
-                              //  ),
-                              
-                              // Padding(
-                              //   padding:  EdgeInsets.only(left: Dimens.bodyMargin/5,right: Dimens.bodyMargin/5,bottom: Dimens.bodyMargin/5),
-                              //   child: Text(":",style: TextStyle(fontSize: Dimens.bodyMargin*2,fontWeight: FontWeight.bold),),
-                              // ),
-                              //   Padding(
-                              //    padding: const EdgeInsets.only(top: 30),
-                              //    child: SizedBox(
-                              //     height:Dimens.bodyMargin*5 ,
-                              //     width: Dimens.bodyMargin*1.7,
-                              //     child: const TextField(
-                              //       style: TextStyle(color: Colors.black),
-                              //       cursorColor: Colors.black,
-                              //       textAlign: TextAlign.center,
-                              //        maxLength: 2,
-                              //        keyboardType:TextInputType.number ,
-                              //       decoration: InputDecoration(
-                              //       fillColor: Color.fromARGB(255, 211, 205, 208),
-                              //       contentPadding: EdgeInsets.only(top: 10,bottom: 40)
-                                     
-                              //       ),
-                              //     ),
-                              //    ),
-                              //  ),
-                            ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: Row(
+                                      
+                                      children: [ 
+                                        Visibility(
+                                               visible: managePodcastController.isvisibleMinute.value, 
+                                                    child: const Padding(
+                                                      padding: EdgeInsets.all(3),
+                                                      child: Text("Eror",
+                                                      style: TextStyle(color: Color.fromARGB(255, 250, 1, 1)),),
+                                                    ),
+                                                   ),
+                                                 
+                                                 const Text("دقیقه",style: TextStyle(color: Colors.black),
+                                               ),
+                                      ],
+                                    ),
+                                  ),
+                                            
+                                  ],
+                                ),
+                                                    
+                                  ),      
+                                   
+                                   const Padding(
+                                     padding: EdgeInsets.only(bottom: 50),
+                                     child: Text(":",style: TextStyle(fontWeight: FontWeight.bold,fontSize:50),),
+                                   ),
+                           
+                                    SizedBox(
+                                    height:Dimens.bodyMargin*5 ,
+                                    width: Dimens.bodyMargin*1.7,
+                                   
+                                  child: Column(
+                                  children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: TextField(   
+                                    maxLength: 2,
+                                    
+                                    controller: managePodcastController.titleTextEditingControllerHour,
+                                    keyboardType: TextInputType.number,
+                                      cursorColor: const Color.fromARGB(255, 12, 12, 12),
+                                       style: const TextStyle(color: Color.fromARGB(255, 126, 4, 4)),
+                                    decoration: const InputDecoration(
+                                      fillColor: Color.fromARGB(255, 203, 202, 202),
+                                     border: OutlineInputBorder(),
+                                  
+                                     hintText: "Enter Number",
+                                    ),
+                                    
+                                    onChanged: (value) {
+                                                          
+                                    managePodcastController.inputHoure!.value=int.tryParse(
+                                    value)!;
+                                    if(managePodcastController.inputHoure!>12){
+                                        managePodcastController.isvisibleHour.value=true;
+                                        
+                                        managePodcastController.titleTextEditingControllerHour.clear();
+                                       
+                                    
+                                    }else{
+                                     managePodcastController.isvisibleHour.value=false;
+                                     value="";
+                                    }
+                                    }),
+                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: Row(
+                                      
+                                      children: [ 
+                                        Visibility(
+                                               visible: managePodcastController.isvisibleHour.value, 
+                                                    child: const Padding(
+                                                      padding: EdgeInsets.all(3),
+                                                      child: Text("Eror",
+                                                      style: TextStyle(color: Color.fromARGB(255, 250, 1, 1)),),
+                                                    ),
+                                                   ),
+                                                   const SizedBox(width: 1,),
+                                                 const Text("ساعت",style: TextStyle(color: Colors.black),
+                                                 ),
+                                      ],
+                                    ),
+                                  ),
+                                          
+                                             
+                                            
+                                  ],
+                                ),
+                                                    
+                                  ), 
+                              ],
+                             ),
                            ),
                            
                           ),
