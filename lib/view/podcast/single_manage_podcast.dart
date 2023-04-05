@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -9,7 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 import 'package:get/get.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:html_editor_enhanced/utils/utils.dart';
+import 'package:tecblog/Services/pick_file.dart';
 import 'package:tecblog/component/decorations.dart';
 import 'package:tecblog/constant/my_colors.dart';
 import 'package:tecblog/controller/file_controller.dart';
@@ -29,6 +30,8 @@ class SingleManagePodcast extends StatelessWidget {
 SinglePodcastController controller  =Get.put(SinglePodcastController());
 ManagePodcastController managePodcastController =Get.put(ManagePodcastController());
 FilePickerController filePickerController =Get.put(FilePickerController());
+
+  SingleManagePodcast({Key? key}) : super(key: key);
 
 
  @override
@@ -51,16 +54,21 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                         Stack(
                           children: [
                             filePickerController.file.value.name=='nothing'?
-                            CachedNetworkImage(
-                             // imageUrl: managePodcastController.podcastFileModel.value.,
-                             imageUrl: "https://s2.uupload.ir/files/th_occc.jpg",
-                              imageBuilder: ((context, imageProvider) =>
-                                  Image(image: imageProvider)),
-                              placeholder: ((context, url) => const loading()),
-                              errorWidget: ((context, url, error) =>
-                                  Image.asset(Assets.images.singlePlaceHolder.path)),
-                                  
-                            ): Image.file(File(filePickerController.file.value.path!)),
+                            SizedBox(
+                               width: Get.width,
+                               height: Get.height/3,
+                              child: CachedNetworkImage(
+                               // imageUrl: managePodcastController.podcastFileModel.value.,
+                               imageUrl: "https://s2.uupload.ir/files/th_occc.jpg",
+                                imageBuilder: ((context, imageProvider) =>
+                                    Image(image: imageProvider)),
+                                placeholder: ((context, url) => const loading()),
+                                errorWidget: ((context, url, error) =>
+                                    Image.asset(Assets.images.singlePlaceHolder.path,fit: BoxFit.cover,)),                                
+                              ),
+                            ): Image.file(File(filePickerController.file.value.path!),
+                            fit: BoxFit.cover,
+                            ),
                             Positioned(
                                 top: 0,
                                 left: 0,
@@ -101,7 +109,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                           child: GestureDetector(
                             onTap: () {
                               //pickFile
-                             
+                             pickFile();
                             },
                             child: Container(
                                                    
@@ -168,20 +176,19 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                      Row(
-                                      
+                                      Row(      
                                         children: [
                                           ImageIcon(Image.asset(Assets.icons.microphone.path).image,color: SolidColors.seeMore,),
                                           SizedBox(width: 8,),
-                                          Text("بخش چهارم : فریلنسر دیوانه",style: textheme.headline4,)
+                                          Text("بخش چهارم : فریلنسر دیوانه",style: textheme.headline4,),
+                                          
                                         ],
                                       ),
             
-                                      Text("22:00"),
-                //                      Obx(
-                //   ()=>Text("${managePodcastController.selectedTime.value.hour}:${managePodcastController.selectedTime.value.minute}",style: TextStyle(fontSize: 25),),
-                  
-                // ),
+                                          Text(
+                                          managePodcastController.titleTextEditingControllerMinute.text,
+                                          style: TextStyle(color: Colors.red),),
+                                                 
                                   ],
                                 ),
                               );
@@ -313,10 +320,8 @@ FilePickerController filePickerController =Get.put(FilePickerController());
        titleStyle:const TextStyle(
         color: Color.fromARGB(255, 11, 10, 10)), 
        content:  
-         
            TextField(
-            //controller: managePodcastController.titleTextEditingController,
-            controller: managePodcastController.titleTextEditingControllerMinute,
+            controller: managePodcastController.titleTextEditingController,
             keyboardType: TextInputType.text,
             style: const TextStyle(
               color: Color.fromARGB(255, 0, 6, 11),
@@ -331,12 +336,12 @@ FilePickerController filePickerController =Get.put(FilePickerController());
        radius: 8,
        confirm: Row(
          children: [
-       TextButton(onPressed: ()async {
-         managePodcastController.titleUpdate();
+       TextButton(onPressed: () {
+         managePodcastController.updateTitle();
 
        }, child: Text("تایید",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
         TextButton(onPressed: () {
-             Get.back();
+             
        }, child: Text("بعدا",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),))
          ],
        ),
@@ -391,7 +396,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                                 iconSize: 60.0,
                                 onPressed: () {
                                 //انتخاب فایل صوتی
-                                //audioFile
+                                audioFile();
                               }, icon: ImageIcon(AssetImage(Assets.icons.file.path))),
                               const Text("انتخاب فایل صوتی",
                               style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold)),
@@ -436,6 +441,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                                     value)!;
                                     if(managePodcastController.input!>60){
                                         managePodcastController.isvisibleMinute.value=true;
+                                        managePodcastController.titleTextEditingControllerMinute.clear();
                                     
                                     }else{
                                      managePodcastController.isvisibleMinute.value=false;
@@ -487,7 +493,7 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                                     controller: managePodcastController.titleTextEditingControllerHour,
                                     keyboardType: TextInputType.number,
                                       cursorColor: const Color.fromARGB(255, 12, 12, 12),
-                                       style: const TextStyle(color: Color.fromARGB(255, 126, 4, 4)),
+                                       style: const TextStyle(color: Color.fromARGB(255, 9, 9, 9)),
                                     decoration: const InputDecoration(
                                       fillColor: Color.fromARGB(255, 203, 202, 202),
                                      border: OutlineInputBorder(),
@@ -550,8 +556,11 @@ FilePickerController filePickerController =Get.put(FilePickerController());
                      padding: const EdgeInsets.only(top: 30),
                      child: ElevatedButton(
               style:  ButtonStyle(fixedSize: MaterialStateProperty.all(Size(Get.width/3,56))),
-                    onPressed: (() {
+                    onPressed: (()async {
                      // Get.toNamed(NamedRoute.singleManageArticle);
+                      await managePodcastController.titlePodcast();
+                      await managePodcastController.filePodcast();
+                      await managePodcastController.UpdatePodcast();
                     }),
                     child: const Text(
                       "تایید",
@@ -580,4 +589,3 @@ FilePickerController filePickerController =Get.put(FilePickerController());
   // }
   
 }
-

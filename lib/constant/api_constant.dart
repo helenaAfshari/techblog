@@ -12,7 +12,7 @@ class ApiConstant{
   static const articlePost = baseUrl + "article/post.php";
   static const podcastFile = baseUrl + "podcast/get.php?command=get_files&podcats_id=";
   static const PublishedByMePodcast = baseUrl + "podcast/get.php?command=published_by_me&user_id=";
-  static const postTitle = baseUrl + "podcast/post.php";
+  static const postPodcast = baseUrl + "podcast/post.php";
   
 }
 
@@ -27,3 +27,33 @@ class ApiArticleKeyConstant{
   static const command ="command";
 
 }
+
+//storPodcastTitle
+class ApiPodcastTitleKyConstants{
+  static const userId ="user_id";
+  static const title ="title";
+  static const catId ="cat_id";
+  static const command ="command";
+}
+
+
+//storPodcastFile
+class ApiPodcastFileKyConstants{
+  static const podcastId ="podcast_id";
+  static const title ="title";
+  static const length ="length";
+  static const file ="file";
+  static const command ="command";
+}
+
+//updatePodcastPoster
+class ApiPodcastUpdateKyConstants{
+  static const userId ="user_id";
+  static const podcastId ="podcast_id";
+  static const image ="image";
+  static const file ="file";
+  static const command ="command";
+}
+
+
+

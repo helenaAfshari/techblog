@@ -11,12 +11,10 @@ class PodcastModel{
    String? publisher;
    String? view;
    String?createdAt;
-
-
-          
-          PodcastModel(
-        this.title,
-          );
+   
+   PodcastModel(
+    this.poster,
+   );
 
 
    PodcastModel.fromJson(Map<String, dynamic> element){
